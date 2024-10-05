@@ -70,7 +70,7 @@ function generatePDF() {
     doc.setFont("times", "bold");
     doc.text(`CSE - ${section} (Group ${group})`, 20, submittedByY + 25); // Updated to include section and group
     doc.setFont("times", "normal");
-    doc.text("Semester / Year- V/III", 20, submittedByY + 32.5);
+    doc.text("Semester / Year- II/III", 20, submittedByY + 32.5);
 
     // Submitted To Section - Bottom Right Alignment
     const submittedToY = 245;
