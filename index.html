@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab Report Front Page Generator</title>
+</head>
+<body>
+    <h1>Enter Your Details for the Lab Report</h1>
+    <form id="templateForm">
+        <label for="name">Your Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="enrollment">Enrollment Number:</label>
+        <input type="text" id="enrollment" name="enrollment" required><br><br>
+
+        <label for="section">Section:</label>
+        <select id="section" name="section" required>
+            <option value="">Select Section</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+            <option value="E">E</option>
+            <option value="F">F</option>
+            <option value="G">G</option>
+        </select><br><br>
+
+        <label for="group">Group:</label>
+        <select id="group" name="group" required>
+            <option value="">Select Group</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+        </select><br><br>
+
+        <label for="subjectCode">Subject Code:</label>
+        <select id="subjectCode" name="subjectCode" required>
+            <option value="">Select Subject Code</option>
+            <option value="CS208">CS208</option>
+            <option value="CS271">CS271</option>
+            <option value="CS272">CS272</option>
+        </select><br><br>
+        <label for="SUBJECTNAME">Subject Name:</label>
+        <select id="SUBJECTNAME" name="SUBJECTNAME" required>
+            <option value="">Select Subject Name</option>
+            <option value="Data Structures Using C LAB">Data Structures Using C LAB</option>
+            <option value="Object Oriented Concepts Using Java LAB">Object Oriented Concepts Using Java LAB</option>
+            <option value="Python Programming LAB">Python Programming LAB</option>
+        </select><br><br>
+        
+        <label for="faculty">Faculty:</label>
+        <input type="text" id="faculty" name="faculty" required><br><br>
+
+        <label for="facultyJobTitle">Faculty Job Title:</label>
+        <select id="facultyJobTitle" name="facultyJobTitle" required>
+            <option value="" disabled selected>Select your faculty job title</option>
+            <option value="Assistant Professor">Assistant Professor</option>
+            <option value="Associate Professor">Associate Professor</option>
+        </select><br><br>
+
+        <label for="labInstructor">Lab Instructor:</label>
+        <input type="text" id="labInstructor" name="labInstructor" required><br><br>
+
+        <button id="generateBtn" type="button">Generate PDF</button>
+    </form>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
