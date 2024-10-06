@@ -10,10 +10,20 @@ function generatePDF() {
     let labInstructor = document.getElementById("labInstructor").value; // Updated to take Lab Instructor text
     const section = document.getElementById("section").value; // Get selected section
     const group = document.getElementById("group").value; // Get selected group
+    const year = document.getElementById("Year").value; // Get selected year
+    const semester = document.getElementById("Semester").value; // Get selected Semester
     let subjectName = "";
     let facultyJobTitle = document.getElementById("facultyJobTitle").value;
-    const subjectCode=document.getElementById("subjectCode").value;
-    subjectName = document.getElementById("SUBJECTNAME").value;;
+    let InstructorTile = document.getElementById("InstructorTitle").value;
+    let subjectCode=document.getElementById("subjectCode").value;
+    subjectName = document.getElementById("SUBJECTNAME").value;
+
+    // Get the subject code, using the custom value if 'Other' is selected
+    if (subjectCode === "Other") {
+        subjectCode = document.getElementById("customSubjectCode").value;
+        document.getElementById("SUBJECTNAME").value="Other";
+        subjectName = document.getElementById("customSubjectName").value;
+    }
     // Determine subject name based on subject code
    
     const doc = new jsPDF();
@@ -70,7 +80,7 @@ function generatePDF() {
     doc.setFont("times", "bold");
     doc.text(`CSE - ${section} (Group ${group})`, 20, submittedByY + 25); // Updated to include section and group
     doc.setFont("times", "normal");
-    doc.text("Semester / Year- II/III", 20, submittedByY + 32.5);
+    doc.text(`Semester / Year- ${semester}/${year}`, 20, submittedByY + 32.5);
 
     // Submitted To Section - Bottom Right Alignment
     const submittedToY = 245;
@@ -83,7 +93,7 @@ function generatePDF() {
     doc.setFont("times", "bold");
     doc.text(`${labInstructor}`, submittedToX, submittedToY + 25); // Updated to take Lab Instructor text
     doc.setFont("times", "normal");
-    doc.text(`(Lab Instructor)`, submittedToX, submittedToY + 32.5);
+    doc.text(`${InstructorTile}`, submittedToX, submittedToY + 32.5);
 
     // Save the PDF
     doc.save(`${name}_Lab_Report_Front_Page.pdf`); 
@@ -92,39 +102,47 @@ function fillDetails() {
     const subjectCode = document.getElementById("subjectCode").value;
     const section = document.getElementById("section").value;
     const group = document.getElementById("group").value;
+    const year = document.getElementById("Year").value; // Get selected year
+    const semester = document.getElementById("Semester").value; // Get selected Semester
     let submittedTo = "";
     let labInstructor = "";
     let facultyJobTitle="Assistant Professor";
-if (subjectCode === "CS271" && section === "A" && group === "1") {
+if (subjectCode === "CS271" && section === "A" && group === "1"&& year=="II" && semester=="III" ) {
     submittedTo= "Dr. Sheeba Praveen";facultyJobTitle="Associate Professor";
     labInstructor="Mariam Daood"; // Faculty for CS271, section A, group 1
     document.getElementById("faculty").value = `${submittedTo}`;
     document.getElementById("labInstructor").value = `${labInstructor}`;
-} else if (subjectCode === "CS271" && section === "A" && group === "2") {
+    InstructorTile = document.getElementById("InstructorTitle").value="Lab Instructor";
+} else if (subjectCode === "CS271" && section === "A" && group === "2" && year=="II" && semester=="III" ) {
     submittedTo= "Dr. Sheeba Praveen";facultyJobTitle="Associate Professor";
     labInstructor="Qudsia Shahab"; // Faculty for CS271, section A, group 2
     document.getElementById("faculty").value = `${submittedTo}`;
     document.getElementById("labInstructor").value = `${labInstructor}`;
-} else if (subjectCode === "CS208" && section === "A") {
+    InstructorTile = document.getElementById("InstructorTitle").value="Lab Instructor";
+} else if (subjectCode === "CS208" && section === "A" && year=="II" && semester=="III" ) {
     submittedTo= "Ajaz Hussain Warsi";
     labInstructor="Riajuddin Khan"; // Faculty for CS271, section A, group 2
+    InstructorTile = document.getElementById("InstructorTitle").value="Sr. Instructor";
     document.getElementById("faculty").value = `${submittedTo}`;
     document.getElementById("labInstructor").value = `${labInstructor}`;
-}else if (subjectCode === "CS272" && section === "A" && group === "1") {
+}else if (subjectCode === "CS272" && section === "A" && group === "1" && year=="II" && semester=="III" ) {
     submittedTo= "Anum Kamal";
     labInstructor="Mohammad Aman"; // Faculty for CS271, section A, group 2
     document.getElementById("faculty").value = `${submittedTo}`;
     document.getElementById("labInstructor").value = `${labInstructor}`;
-} else if (subjectCode === "CS272" && section === "A" && group === "2") {
+    InstructorTile = document.getElementById("InstructorTitle").value="Lab Instructor";
+
+} else if (subjectCode === "CS272" && section === "A" && group === "2" && year=="II" && semester=="III" ) {
     submittedTo= "Noorishta Hashmi";
     labInstructor="Afza Firdous"; // Faculty for CS271, section A, group 2
     document.getElementById("faculty").value = `${submittedTo}`;
     document.getElementById("labInstructor").value = `${labInstructor}`;
-
+    InstructorTile = document.getElementById("InstructorTitle").value="Lab Instructor";
 } else {
 }
 document.getElementById("facultyJobTitle").value = `${facultyJobTitle}`;
 let subjectName="";
+if(year=="II" && semester=="III"){
 switch (subjectCode) {
     case "CS208":
         subjectName = "Data Structures Using C LAB";
@@ -142,8 +160,26 @@ switch (subjectCode) {
         subjectName = document.getElementById("SUBJECTNAME").value;
         break;
 }
+}
 document.getElementById("SUBJECTNAME").value=`${subjectName}`;
 }
 // Call the function to generate the PDF when needed (e.g., on button click)
 document.getElementById("generateBtn").addEventListener("click", generatePDF);
 document.getElementById("subjectCode").addEventListener("change", fillDetails);
+document.getElementById("subjectCode").addEventListener("change", function () {
+    const subjectCode = document.getElementById("subjectCode").value;
+    const customSubjectCodeContainer = document.getElementById("customSubjectCodeContainer");
+    
+    if (subjectCode === "Other") {
+        customSubjectCodeContainer.style.display = "block"; // Show the custom subject code input
+        customSubjectNameContainer.style.display = "block"; // Show the custom subject code input
+        document.getElementById("SUBJECTNAME").value="Other";
+        document.getElementById("faculty").value="";
+        document.getElementById("labInstructor").value="Other";
+    } else {
+        customSubjectCodeContainer.style.display = "none"; // Hide the custom subject code input
+        customSubjectNameContainer.style.display = "none"; // Hide the custom subject code input
+    }
+
+    fillDetails(); // Call fillDetails to update other related fields if necessary
+});
