@@ -6,6 +6,7 @@ const logo="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAATwAAAE8CAYAAAEqAj2QAA
 function generatePDF() {
     const name = document.getElementById("name").value;
     const roll = document.getElementById("enrollment").value;
+    const department= document.getElementById("department").value;
     let submittedTo = document.getElementById("faculty").value; // Updated to take Faculty text
     let labInstructor = document.getElementById("labInstructor").value; // Updated to take Lab Instructor text
     const section = document.getElementById("section").value; // Get selected section
@@ -47,11 +48,13 @@ function generatePDF() {
     // Add Space Above Department Title
     currentY += logoHeight + gap; // Add gap units of space after the logo
     doc.setFont("times", "bold"); // Set font to Cambria for department
-    doc.setFontSize(28);
-    doc.text("Department of Computer Science", pageWidth / 2, currentY, null, null, "center"); // First line
-    currentY += 10; // Add space for the next line
-    doc.text("& Engineering", pageWidth / 2, currentY, null, null, "center"); // Second line
-
+    doc.setFontSize(28);// Wrap text and split into multiple lines if necessary
+    
+    const splitDepartmentText = doc.splitTextToSize(department, pageWidth - 20);
+    for (let i = 0; i < splitDepartmentText.length; i++) {
+        doc.text(splitDepartmentText[i], pageWidth / 2, currentY, null, null, "center");
+        currentY += 10; // Move down for the next line if needed
+    }
     // Add Space Above Session
     doc.setFont("times", "normal");
 
