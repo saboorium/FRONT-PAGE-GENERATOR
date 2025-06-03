@@ -1,25 +1,38 @@
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Easily create assignment front pages with student and course details. Export-ready PDF layout for academic submissions.">
     <link rel="stylesheet" href="style.css" />
-    <link rel="icon" type="image/x-icon" href="favicon.png">
+    <link rel="icon" type="image/x-icon" href="App_favicon.png" as="icon-image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!--<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />--!>
+    <link rel="preload" href="https://www.transparenttextures.com/patterns/cartographer.png" as="image">
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />-->
     <title>ASSIGNMENT Front Page Generator</title>
   </head>
   <body>
-    <h1>ASSIGNMENT Front Page Generator</h1>
-    <button onclick="window.location.href='index.html';">
-      Go to LAB REPORT FRONT PAGE GENERATOR
-    </button>
-    <form id="templateForm">
-      <label for="xx">Text:</label><br /><br />
+    <div class="container">
+      <h1>Front Page Generator</h1>
+      <button
+onclick="window.location.href='index.html';"
+style="background:#205494;color:#e0e0e0;padding
+:12px 25px;border-radius:8px;border:1px solid
+rgba (255, 255, 255,0.1); Font-
+size:1em; cursor:pointer;">Go to Lab Report
+Front Page Generator</button>
+
+      <form id="templateForm">
+        <label for="xx">Assignment Type:</label><br /><br />
       <div id="AssignmentNumber" class="option-group">
       <input type="radio" id="assignment1" name="assignment" value="Assignment">
       <label for="assignment1" class="option-label">Assignment</label>
-  
+
       <input type="radio" id="assignment2" name="assignment" value="Assignment 1">
       <label for="assignment2" class="option-label">Assignment 1</label>
-  
+
       <input type="radio" id="assignment3" name="assignment" value="Assignment 2">
       <label for="assignment3" class="option-label">Assignment 2</label>
       </div><br />
@@ -48,7 +61,8 @@
         <option value="I">1st</option>
         <option value="II">2nd</option>
         <option value="III">3rd</option>
-        <option value="IV">4th</option></select
+        <option value="IV">4th</option>
+        <option value="V">5th</option></select
       ><br /><br />
 
       <label for="Semester">Semester:</label>
@@ -61,7 +75,8 @@
         <option value="V">5th</option>
         <option value="VI">6th</option>
         <option value="VII">7th</option>
-        <option value="VIII">8th</option></select
+        <option value="VIII">8th</option>
+        <option value="IX">9th</option></select
       ><br /><br />
 
       <label for="section">Section:</label>
@@ -92,24 +107,34 @@
         Eg: (Department of...) or (Assistant Professer):</label>
       <input type="text" id="facultyDept" name="facultyDept" required="" /><br /><br />
 
-      <button id="generateBtn" type="button">Generate PDF</button>
-    </form>
-    
+        <button id="generateBtn" type="button">Generate PDF</button>
+      </form>
+    </div>
+
     <div class="cont">.</div>
+
     <footer>
       <p>
         Original code by
-        <a href="https://github.com/saboorium" target="_blank" >Abdul Saboor</a>
+        <a href="https://github.com/saboorium" target="_blank">Abdul Saboor</a>
         | Modified by
-        <a
-          href="https://github.com/abdul-rahman-1"
-          target="_blank"
-          class="highlight"
-          >Abdul Rahman</a
-        >
+        <a href="https://github.com/abdul-rahman-1" target="_blank" class="highlight">Abdul Rahman</a>
       </p>
+      <!--<p id="pdfCounterDisplay">PDFs Generated: <span id="pdfCounter">0</span></p>!-->
     </footer>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="./Script_Assignment.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+    <script src="./Script_Assignment.js" defer></script>
+    <script>
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.body.style.backgroundImage = "url('https://www.transparenttextures.com/patterns/cartographer.png')";
+      document.body.style.backgroundRepeat = "repeat";
+      document.body.style.backgroundAttachment = "fixed";
+      document.body.style.backgroundPosition = "center center";
+      document.body.style.backgroundSize = "auto";
+    }, 0);
+  });
+</script>
   </body>
 </html>
