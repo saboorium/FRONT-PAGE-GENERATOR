@@ -1,18 +1,30 @@
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Generate lab report front pages with department, subject, year, and faculty details. Quick and customizable form-based generator.">
     <link rel="stylesheet" href="style.css" />
-    <link rel="icon" type="image/x-icon" href="favicon.png">
+    <link rel="icon" type="image/x-icon" href="App_favicon.png" as="icon-image"/>
+    <script type="module">
+    import * as PDFLib from 'https://cdn.skypack.dev/pdf-lib';
+    window.PDFLib = PDFLib;
+  </script
+    <!--<link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!--<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <!--<link rel="preload" href="https://www.transparenttextures.com/patterns/cartographer.png" as="image">--!>
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/heroicons/2.0.18/24/outline/heroicons.min.css" />-->
     <title>Lab Report Front Page Generator</title>
   </head>
   <body>
-    <h1>Enter Your Details for the Lab Report</h1>
-    <button onclick="window.location.href='index2.html';">
-      Go to ASSIGNMENT FRONT PAGE Generator
-    </button>
-    <form id="templateForm">
-      <label for="name">Your Name:</label>
+    <div class="container">
+      <h1>Front Page Generator</h1>
+      <button onclick="window.location.href='index2.html';" class="nav-btn">Go to Assignment Front Page Generator</button>
+
+
+      <form id="templateForm">
+          <label for="name">Your Name:</label>
       <input type="text" id="name" name="name" required="" /><br /><br />
 
       <label for="enrollment">Enrollment Number:</label>
@@ -24,25 +36,46 @@
       /><br /><br />
 
       <label for="department">Department Name:</label>
-      <input
-        type="text"
-        id="department"
-        name="department"
-        value="Department of Computer Science and Engineering"
-      /><br /><br />
+       <select id="department" name="department" required="">
+      <option value="">Select Department</option>
+      <option value="Department of Architecture">Department of Architecture</option>
+      <option value="Department of Basic Medical Sciences">Department of Basic Medical Sciences</option>
+      <option value="Department of BioEngineering">Department of BioEngineering</option>
+      <option value="Department of Business Management">Department of Business Management</option>
+      <option value="Department of Chemical Engineering">Department of Chemical Engineering</option>
+     <option value="Department of Commerce">Department of Commerce</option>
+     <option value="Department of Computer Application">Department of Computer Application</option>
+     <option value="Department of Computer Science and Engineering">Department of Computer Science and Engineering</option>
+     <option value="Department of Civil Engineering">Department of Civil Engineering</option>
+     <option value="Department of Education">Department of Education</option>
+     <option value="Department of Electrical Engineering">Department of Electrical Engineering</option>
+     <option value="Department of Electronics and Communication Engineering">Department of Electronics and Communication Engineering</option>
+     <option value="Department of Humanities and Social Sciences">Department of Humanities and Social Sciences</option>
+     <option value="Department of Journalism and Mass Communication">Department of Journalism and Mass Communication</option>
+     <option value="Department of Languages">Department of Languages</option>
+     <option value="Department of Law">Department of Law</option>
+     <option value="Department of Mechanical Engineering">Department of Mechanical Engineering</option>
+     <option value="Department of Paramedical Sciences">Department of Paramedical Sciences</option>
+     <option value="Department of Pharmacy">Department of Pharmacy</option>
+     <option value="Department of Physiotherapy">Department of Physiotherapy</option>
+     <option value="Department of Information Technology">Department of Information Technology</option>
+     <option value="Integral Institute of Agricultural Science and Technology (IIAST)">Integral Institute of Agricultural Science and Technology (IIAST)</option>
+     <option value="Integral Institute of Medical Sciences & Research (IIMSR)">Integral Institute of Medical Sciences & Research (IIMSR)</option></select>
+     <br /><br />
 
-      <label for="Year">Year:</label>
-      <select id="Year" name="Year" required="">
+       <label for="Year">Year:</label>
+       <select id="Year" name="Year" required="">
         <option value="">Select Year</option>
         <option value="I">1st</option>
         <option value="II">2nd</option>
         <option value="III">3rd</option>
-        <option value="IV">4th</option></select
+        <option value="IV">4th</option>
+        <option value="V">5th</option></select
       ><br /><br />
 
       <label for="Semester">Semester:</label>
       <select id="Semester" name="Semester" required="">
-        <option value="">Select Year</option>
+        <option value="">Select Semester</option>
         <option value="I">1st</option>
         <option value="II">2nd</option>
         <option value="III">3rd</option>
@@ -50,7 +83,8 @@
         <option value="V">5th</option>
         <option value="VI">6th</option>
         <option value="VII">7th</option>
-        <option value="VIII">8th</option></select
+        <option value="VIII">8th</option>
+        <option value="IX">9th</option></select
       ><br /><br />
 
       <label for="section">Section:</label>
@@ -136,25 +170,36 @@
         <option value="true">Yes</option></select
       ><br /><br />
 
-      <button id="generateBtn" type="button">Generate PDF</button>
-    </form>
+
+        <button id="generateBtn" type="button">Generate PDF</button>
+      </form>
+    </div>
+
     <div class="cont">.</div>
+
     <footer>
       <p>
         Original code by
         <a href="https://github.com/saboorium" target="_blank">Abdul Saboor</a>
         | Modified by
-        <a
-          href="https://github.com/abdul-rahman-1"
-          target="_blank"
-          class="highlight"
-          >Abdul Rahman</a
-        >
+        <a href="https://github.com/abdul-rahman-1" target="_blank" class="highlight">Abdul Rahman</a>
       </p>
+      <!--<p id="pdfCounterDisplay">PDFs Generated: <span id="pdfCounter">0</span></p>!-->
     </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
-    <script src="Script_LabReport.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js" defer></script>
+    <script src="Script_LabReport.js" defer></script>
+    <script>
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.body.style.backgroundImage = "url('https://www.transparenttextures.com/patterns/cartographer.png')";
+      document.body.style.backgroundRepeat = "repeat";
+      document.body.style.backgroundAttachment = "fixed";
+      document.body.style.backgroundPosition = "center center";
+      document.body.style.backgroundSize = "auto";
+    }, 0);
+  });
+</script>
   </body>
 </html>
