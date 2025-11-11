@@ -7,7 +7,7 @@
 
 > A lightning-fast, customizable **PDF generator for Assignment and Lab Report front pages**, built using HTML, CSS, and JavaScript—no frameworks, no bundlers.
 
-🔗 **Live Demo**: [Front Page Generator](https://gitanaskhan26.github.io/Front-Page-Generator/)
+🔗 **Live Demo**: [Front Page Generator](https://saboorium.github.io/FRONT-PAGE-GENERATOR/)
 
 ---
 
