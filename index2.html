@@ -24,6 +24,9 @@ rgba (255, 255, 255,0.1); Font-
 size:1em; cursor:pointer;">Go to Lab Report
 Front Page Generator</button>
 
+      <!-- Theme toggle button (added) -->
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle theme">🌙</button>
+
       <form id="templateForm">
         <label for="xx">Assignment Type:</label><br /><br />
       <div id="AssignmentNumber" class="option-group">
@@ -136,5 +139,43 @@ Front Page Generator</button>
     }, 0);
   });
 </script>
+
+    <!-- Theme toggle script (persisted key: fpg-theme) -->
+    <script>
+    (function(){
+      const storageKey = 'fpg-theme';
+      const root = document.documentElement;
+      const toggle = document.getElementById('themeToggle');
+
+      function applyTheme(theme) {
+        if (!theme) return;
+        root.setAttribute('data-theme', theme);
+        if (toggle) {
+          toggle.textContent = theme === 'dark' ? '🌙' : '☀️';
+          toggle.title = theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme';
+          toggle.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
+        }
+      }
+
+      const saved = localStorage.getItem(storageKey);
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const initial = saved || (prefersDark ? 'dark' : 'light');
+      applyTheme(initial);
+
+      if (toggle) {
+        toggle.addEventListener('click', () => {
+          const current = root.getAttribute('data-theme') || (prefersDark ? 'dark' : 'light');
+          const next = current === 'dark' ? 'light' : 'dark';
+          applyTheme(next);
+          localStorage.setItem(storageKey, next);
+        });
+      }
+
+      window.fpgTheme = {
+        set: (t) => { applyTheme(t); localStorage.setItem(storageKey, t); },
+        get: () => root.getAttribute('data-theme'),
+      };
+    })();
+    </script>
   </body>
 </html>
