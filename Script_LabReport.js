@@ -135,7 +135,8 @@ document.addEventListener("DOMContentLoaded", function () {
         y += gap - 7.5;
         doc.setFontSize(24).text("Lab Report", pageWidth / 2, y, { align: "center" });
         y += 10;
-        doc.text("Session (2025-2026)", pageWidth / 2, y, { align: "center" });
+                const academicSession = document.getElementById("academicSession").value;
+        doc.text(`Session (${academicSession})`, pageWidth / 2, y, { align: "center" });
 
         y += gap - 7.5;
         doc.setFontSize(27).text(subjectName, pageWidth / 2, y, { align: "center" });
