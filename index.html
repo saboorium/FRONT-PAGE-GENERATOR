@@ -22,6 +22,8 @@
       <h1>Front Page Generator</h1>
       <button onclick="window.location.href='index2.html';" class="nav-btn">Go to Assignment Front Page Generator</button>
 
+      <!-- Theme toggle button (added) -->
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle theme">🌙</button>
 
       <form id="templateForm">
           <label for="name">Your Name:</label>
@@ -86,6 +88,13 @@
         <option value="VIII">8th</option>
         <option value="IX">9th</option></select
       ><br /><br />
+      
+      <label for="academicSession">Academic Session:</label>
+      <input type="text" id="academicSession"
+        name="academicSession"
+        placeholder="e.g., 2024–25"
+        required=""
+      /><br /><br />
 
       <label for="section">Section:</label>
       <select id="section" name="section" required="">
@@ -201,5 +210,43 @@
     }, 0);
   });
 </script>
+
+    <!-- Theme toggle script (persisted key: fpg-theme) -->
+    <script>
+    (function(){
+      const storageKey = 'fpg-theme';
+      const root = document.documentElement;
+      const toggle = document.getElementById('themeToggle');
+
+      function applyTheme(theme) {
+        if (!theme) return;
+        root.setAttribute('data-theme', theme);
+        if (toggle) {
+          toggle.textContent = theme === 'dark' ? '🌙' : '☀️';
+          toggle.title = theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme';
+          toggle.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
+        }
+      }
+
+      const saved = localStorage.getItem(storageKey);
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const initial = saved || (prefersDark ? 'dark' : 'light');
+      applyTheme(initial);
+
+      if (toggle) {
+        toggle.addEventListener('click', () => {
+          const current = root.getAttribute('data-theme') || (prefersDark ? 'dark' : 'light');
+          const next = current === 'dark' ? 'light' : 'dark';
+          applyTheme(next);
+          localStorage.setItem(storageKey, next);
+        });
+      }
+
+      window.fpgTheme = {
+        set: (t) => { applyTheme(t); localStorage.setItem(storageKey, t); },
+        get: () => root.getAttribute('data-theme'),
+      };
+    })();
+    </script>
   </body>
 </html>

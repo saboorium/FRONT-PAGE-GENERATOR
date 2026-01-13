@@ -7,6 +7,7 @@
     --accent-color: #e11e3f;
     --border-color: rgba(255, 255, 255, 0.1);
     --border-focus: rgba(255, 255, 255, 0.3);
+    --heading-color: #e0e0e0;
 }
 
 html, body {
@@ -42,6 +43,7 @@ html, body {
 }
 /* Container wrapping header + form */
 .container {
+    position: relative;
     background-color: var(--card-bg);
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
@@ -59,10 +61,7 @@ html, body {
 }
 
 h1 {
-    background: linear-gradient(135deg, #0e1850, #e9e8e0ea);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--heading-color);
     font-size: clamp(1.8rem, 5vw, 2.8rem);
     margin: 0;
     padding: 10px;
@@ -72,12 +71,21 @@ h1 {
     opacity: 0;
     animation: fadeIn 0.5s ease-out 0.3s forwards, 
                textGlow 2s ease-in-out infinite alternate;
-        }
-        @keyframes fadeIn {
+}
+
+@keyframes fadeIn {
     to { opacity: 1; }
 }
 
-        
+@keyframes textGlow {
+    from {
+        filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.4));
+    }
+    to {
+        filter: drop-shadow(0 0 5px rgba(8, 10, 73, 0.482));
+    }
+}
+
 /* Option group for radio buttons */
 .option-group {
     display: flex;
@@ -144,7 +152,7 @@ button:hover {
     justify-content: center;
     gap: 10px;
     margin: 20px auto 0;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: background-color 0.3s ease, transform 0.12s ease;
     grid-column: 1 / -1;
 }
 
@@ -314,17 +322,8 @@ footer .highlight {
     object-fit: contain;
     filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.1));
     transition: transform 0.3s ease;
-    animation: textGlow 2s ease-in-out infinite alternate
+    animation: textGlow 2s ease-in-out infinite alternate;
 }
-
-@keyframes textGlow {
-            from {
-                filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.4));
-            }
-            to {
-                filter: drop-shadow(0 0 5px rgba(8, 10, 73, 0.482));
-            }
-        } 
 
 @media (max-width: 768px) {
     .brand-logo {
@@ -340,4 +339,62 @@ footer .highlight {
 
 .brand-logo:hover {
     transform: scale(1.05);
+}
+
+/* ----- Theme overrides (light / dark) ----- */
+/* Default theme already uses variables from :root (dark by default).
+   Provide explicit light-theme overrides and optional explicit dark set. */
+
+html[data-theme="light"] {
+    --dark-bg: #f5f7fb;
+    --card-bg: rgba(255,255,255,0.92);
+    --input-bg: #ffffff;
+    --text-color: #0a0a0a;
+    --primary-color: #205494;
+    --accent-color: #e11e3f;
+    --border-color: rgba(0, 0, 0, 0.08);
+    --border-focus: rgba(0, 0, 0, 0.15);
+    --heading-color: #1a1a2e;
+}
+
+html[data-theme="dark"] {
+    /* explicitly restate dark values (keeps current look) */
+    --dark-bg: #010114;
+    --card-bg: rgba(0, 0, 10, 0.3);
+    --input-bg: rgba(255, 255, 255, 0.02);
+    --text-color: #e0e0e0;
+    --primary-color: #205494;
+    --accent-color: #e11e3f;
+    --border-color: rgba(255, 255, 255, 0.1);
+    --border-focus: rgba(255, 255, 255, 0.3);
+    --heading-color: #f8f2f2;
+}
+
+/* ----- Theme toggle button ----- */
+.theme-toggle {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    padding: 8px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    backdrop-filter: blur(4px);
+    transition: background-color 0.18s ease, transform 0.12s ease;
+}
+
+.theme-toggle:hover {
+    transform: translateY(-2px);
+    background-color: rgba(255,255,255,0.04);
+}
+
+/* small icon-only variant on very small screens */
+@media (max-width: 480px) {
+    .theme-toggle { font-size: 0.95rem; padding: 7px; top: 12px; right: 12px; }
 }
